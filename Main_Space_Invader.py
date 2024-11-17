@@ -41,11 +41,45 @@ class Personnage:
         self.canvas=canvas
         self.x=100
         self.y=100
-        self.v=0
+        self.v=1
+        self.dt=8
+        self.dx=1
+        self.dy=0
         self.create()
+        self.bouger()
+        self.toucher_bordure()
 
     def create(self):
         self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
+
+    def bouger(self):
+        self.canvas.move(self.rectangle, self.dx, self.dy)
+        self.x += self.dx
+        self.y += self.dy
+        self.toucher_bordure()  # Vérifie si le personnage touche un bord
+        self.canvas.after(self.dt, self.bouger)
+
+    def toucher_bordure(self):
+        canvas_width = self.canvas.winfo_width()  # Largeur du canevas
+        canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
+
+        # Vérifie si le personnage touche les bords gauche ou droit
+        if self.x <= 0 or self.x + 50 >= canvas_width:
+            self.dx = -self.dx  # Inverse la direction horizontale
+
+            self.y += 15
+            self.canvas.move(self.rectangle,0,10)
+
+        # Vérifie si le personnage touche les bords haut ou bas
+        if self.y <= 0 or self.y + 50 >= canvas_height:
+            self.dy = -self.dy
+
+    def key_handler(self):
+        self.bind_class("Entry", "<Down>", self.next_widget)
+        self.bind_class("Entry", "<Up>", self.next_widget)
+        self.bind_class("Entry", "<Right>", self.next_widget)
+        self.bind_class("Entry", "<Left>", self.next_widget)
+
 
 if __name__=="__main__":
     fenetre=Visuel()
