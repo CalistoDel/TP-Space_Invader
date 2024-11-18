@@ -15,7 +15,7 @@ class Jeu(fenetre):
     def create_Alien():
         p=randint(0,10)
         if p>4:
-            Alien
+            Alien=
 
 
 
