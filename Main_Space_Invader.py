@@ -1,6 +1,6 @@
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
-import Class_Projectile
+from Class_Projectile import Projectile
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
@@ -41,16 +41,16 @@ class Visuel(tk.Tk):
 class Personnage:
     def __init__(self,canvas):
         self.canvas=canvas
-        self.x=100
-        self.y=100
+        self.x=350
+        self.y=600
         self.v=1
         self.dt=8
         self.dx=1
         self.dy=0
         self.create()
-        self.bouger()
+        "self.bouger()"
         self.toucher_bordure()
-        "self.key_handler()"
+        self.key_handler()
 
     def create(self):
         self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
@@ -80,7 +80,7 @@ class Personnage:
     def key_handler(self):
         self.canvas.bind("<Right>", self.Right)
         self.canvas.bind("<Left>", self.Left)
-        self.canvas.bind("<backspace>",self.tir)
+        self.canvas.bind("<space>",self.tir)
         self.canvas.focus_set()    
         
     def Left(self,event):
@@ -94,7 +94,9 @@ class Personnage:
         self.canvas.move(self.rectangle,x,y)
     
     def tir(self,event):
-        Projectile(x,y,Personnage,1,fenetre)
+        coord=self.canvas.coords(self.rectangle)
+        self.x=coord[0]
+        Projectile(self.x + 25, self.y, self.canvas)
 
 
 
