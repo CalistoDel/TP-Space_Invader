@@ -1,10 +1,10 @@
 import tkinter as tk
 
 class Projectile:
-    def __init__(self,x,y,canvas):
+    def __init__(self,x,y,dy,canvas):
         self.x = x
         self.y = y
-        self.dy = -8
+        self.dy = dy
         self.canvas=canvas
         self.create()
         self.bouger()
@@ -15,9 +15,6 @@ class Projectile:
     
 
     def bouger(self):
-        "self.canvas.move(self.circle, self.dx, self.dy)"
-        "if self.camp==ennemi:"
-        "self.dy = -self.dy"
         self.dt=38
         self.y += self.dy
         self.canvas.move(self.circle,0,self.dy)

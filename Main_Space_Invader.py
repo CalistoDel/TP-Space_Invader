@@ -1,6 +1,7 @@
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
 from Class_Projectile import Projectile
+import random as rd
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
@@ -11,7 +12,7 @@ class Visuel(tk.Tk):
         self.Boutton()
         self.menu()
         self.canvas()
-        self.personnage = Personnage(self.canvas1)
+        self.personnage = Alien(self.canvas1)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.score=tk.Label(self,text='Votre score est:')
@@ -38,19 +39,21 @@ class Visuel(tk.Tk):
 
 
 
-class Personnage:
+class Alien:
     def __init__(self,canvas):
         self.canvas=canvas
         self.x=350
-        self.y=600
+        self.y=30
         self.v=1
         self.dt=8
+        self.dt2=rd.randint(400,2000)
+        print(self.dt2)
         self.dx=1
         self.dy=0
         self.create()
-        "self.bouger()"
+        self.bouger()
         self.toucher_bordure()
-        self.key_handler()
+        self.tir()
 
     def create(self):
         self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
@@ -77,26 +80,12 @@ class Personnage:
         if self.y <= 0 or self.y + 50 >= canvas_height:
             self.dy = -self.dy
 
-    def key_handler(self):
-        self.canvas.bind("<Right>", self.Right)
-        self.canvas.bind("<Left>", self.Left)
-        self.canvas.bind("<space>",self.tir)
-        self.canvas.focus_set()    
-        
-    def Left(self,event):
-        x=-50
-        y=0
-        self.canvas.move(self.rectangle,x,y)
-    
-    def Right(self,event):
-        x=50
-        y=0
-        self.canvas.move(self.rectangle,x,y)
-    
-    def tir(self,event):
+    def tir(self):
+        self.dt2=rd.randint(400,2000)
         coord=self.canvas.coords(self.rectangle)
         self.x=coord[0]
-        Projectile(self.x + 25, self.y, self.canvas)
+        Projectile(self.x + 25, self.y - 25,8, self.canvas)
+        self.canvas.after(self.dt2,self.tir)
 
 
 
