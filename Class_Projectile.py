@@ -18,8 +18,8 @@ class Projectile(x,y,fenetre):
 
     def bouger(self):
         self.canvas.move(self.rectangle, self.dx, self.dy)
-        if camp(self)==ennemi:
-            self.dy = -self.dy
+        # if camp(self)==ennemi:
+        #     self.dy = -self.dy
         self.y += self.dy
     
     

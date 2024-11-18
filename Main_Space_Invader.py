@@ -103,6 +103,3 @@ if __name__=="__main__":
     fenetre.title("Space Invader")
     fenetre.mainloop()
 
-
-            
-
