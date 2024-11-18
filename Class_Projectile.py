@@ -1,18 +1,31 @@
 import tkinter as tk
 
-class Projectile(x,y,personnage,niveau,fenetre):
-    def __init__(self,personnage,niveau):
-        if niveau==1:
-            dy=20
-        elif niveau==2:
-            dy=50
-        if personnage==alien and niveau>0:
-            dy=-dy
-        Projectile= fenetre.Canevas.create_oval(x-50,y-50,width=1,outline='white',fill='blue')
-    def déplacement(Projectile):
-        if y>hauteur or y<-hauteur:
-            Projectile.tk.destroy()
-            return
-        if 
-        fenetre.after(20,déplacement)
-        
+class Projectile(x,y,fenetre):
+    def __init__(self):
+        self.x=x
+        self.y=y
+        self.dy=8
+        self.canva=fenetre.canvas1
+        self.create()
+        self.bouger()
+        self.collision()
+        self.toucher_bordure()
+    
+
+    def create(self):
+        self.circle=self.canva.create_circle(self.x + 5 , self.y + 5 , self.x - 5 , self.y - 5 ,fill='white')
+    
+
+    def bouger(self):
+        self.canvas.move(self.rectangle, self.dx, self.dy)
+        if camp(self)==ennemi:
+            self.dy = -self.dy
+        self.y += self.dy
+    
+    
+    def toucher_bordure(self):
+        canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
+
+        # Vérifie si le projectile touche les bords haut ou bas
+        if self.y <= 0 or self.y + 8 >= canvas_height:
+            self.destroy()
