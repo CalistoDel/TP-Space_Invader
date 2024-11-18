@@ -1,6 +1,6 @@
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
-
+import Class_Projectile
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
@@ -34,7 +34,9 @@ class Visuel(tk.Tk):
     def canvas(self):       #fonction qui crée la toile
         self.canvas1=tk.Canvas(self,width= 800, height=700, bg='blue')
         self.canvas1.pack()
-        self.canvas1.create_image(300,300,anchor='center',image=self.image)
+        self.canvas1.create_image(800,700,anchor='center',image=self.image)
+
+
 
 class Personnage:
     def __init__(self,canvas):
@@ -48,6 +50,7 @@ class Personnage:
         self.create()
         self.bouger()
         self.toucher_bordure()
+        "self.key_handler()"
 
     def create(self):
         self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
@@ -67,7 +70,7 @@ class Personnage:
         if self.x <= 0 or self.x + 50 >= canvas_width:
             self.dx = -self.dx  # Inverse la direction horizontale
 
-            self.y += 15
+            self.y += 25
             self.canvas.move(self.rectangle,0,10)
 
         # Vérifie si le personnage touche les bords haut ou bas
@@ -75,10 +78,24 @@ class Personnage:
             self.dy = -self.dy
 
     def key_handler(self):
-        self.bind_class("Entry", "<Down>", self.next_widget)
-        self.bind_class("Entry", "<Up>", self.next_widget)
-        self.bind_class("Entry", "<Right>", self.next_widget)
-        self.bind_class("Entry", "<Left>", self.next_widget)
+        self.canvas.bind("<Right>", self.Right)
+        self.canvas.bind("<Left>", self.Left)
+        self.canvas.bind("<backspace>",self.tir)
+        self.canvas.focus_set()    
+        
+    def Left(self,event):
+        x=-50
+        y=0
+        self.canvas.move(self.rectangle,x,y)
+    
+    def Right(self,event):
+        x=50
+        y=0
+        self.canvas.move(self.rectangle,x,y)
+    
+    def tir(self,event):
+        Projectile(x,y,Personnage,1,fenetre)
+
 
 
 if __name__=="__main__":
