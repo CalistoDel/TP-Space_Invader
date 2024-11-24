@@ -20,6 +20,8 @@ class Jeu(fenetre):
         self.Nb_Alien=0
 
     def create_Alien():
+        # cette fontcion est un algoritme qui permet l'apparition d'aliens
+        #
         L=[]
         for i in range(1,len(self.Liste_Personnage)):
             if self.Liste_Personnage[i]==0:
