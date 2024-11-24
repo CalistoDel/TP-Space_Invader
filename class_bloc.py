@@ -14,5 +14,6 @@ class bloc(x,fenetre):
         self.create()
     
     def create(self):
+        #fonction qui créée un bloc
         self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
     

@@ -22,6 +22,7 @@ class Projectile:
     
 
     def bouger(self):
+        #fonction qui fait bouger les projectiles
         self.dt=38
         self.y += self.dy
         self.canvas.move(self.circle,0,self.dy)
@@ -31,6 +32,7 @@ class Projectile:
     
     
     def toucher_bordure(self):
+        #Fonction qui détruit le projectile si il sort de la zone de jeu
         canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
 
         # Vérifie si le projectile touche les bords haut ou bas

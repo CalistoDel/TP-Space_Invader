@@ -21,7 +21,7 @@ class Jeu(fenetre):
 
     def create_Alien():
         # cette fontcion est un algoritme qui permet l'apparition d'aliens
-        #
+        #les aliens apparaissent que si un element de la liste ListePersonnage est vide pour limiter le nombre d'aliens
         L=[]
         for i in range(1,len(self.Liste_Personnage)):
             if self.Liste_Personnage[i]==0:
@@ -38,6 +38,7 @@ class Jeu(fenetre):
     Bloc1= bloc()
     Bloc2= bloc()
     self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=[Joueur,3],[Bloc1,3],[Bloc2,3]
+    
 
 
 
