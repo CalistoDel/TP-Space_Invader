@@ -57,7 +57,7 @@ class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur
     def tir(self,event):        #Fonctions qui ance un projectile lorsque l'on appuie sur la barre d'espace
         coord=self.canvas.coords(self.rectangle)
         self.x=coord[0]
-        Projectile(self.x + 25, self.y,-8, self.canvas)
+        Projectile(self.x + 25, self.y,1, self.canvas)
 
 
 

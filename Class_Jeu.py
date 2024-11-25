@@ -11,13 +11,12 @@ import Main_Space_Invader
 import class_bloc
 from random import randint
 
-class Jeu(fenetre):
+class Jeu():
 
-    def __init__():
+    def __init__(fenetre):
         self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]
+        self.indice_niveaux = [0,1,1,1,1,1,1,2,2,2,2,3]
         self.Liste_Projectile = []
-        self.Temps_Début = gmtime()
-        self.Nb_Alien=0
 
     def create_Alien():
         # cette fontcion est un algoritme qui permet l'apparition d'aliens
@@ -28,13 +27,13 @@ class Jeu(fenetre):
                 L.append(i)
         indiceL=randint(len(L))
         indice=L[indiceL]
-        self.Liste_Personnages[indice] = Alien(...)
+        self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
 
 
 
 
     Visuel()
-    Joueur= Vaisseau(canvas)
+    Joueur= Vaisseau()
     Bloc1= bloc()
     Bloc2= bloc()
     self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=[Joueur,3],[Bloc1,3],[Bloc2,3]

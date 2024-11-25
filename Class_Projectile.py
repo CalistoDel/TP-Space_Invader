@@ -7,15 +7,18 @@
 
 import tkinter as tk
 
-class Projectile:
-    def __init__(self,x,y,dy,canvas):
+class Projectile(niveauAlien,degat):
+    def __init__(self,x,y,niveauAlien,canvas):
         self.x = x
         self.y = y
-        self.dy = dy
-        self.canvas=canvas
+        self.dy = -8*niveauAlien
+        self.canvas = canvas
         self.create()
         self.bouger()
-    
+        self.dt = 15 ms
+        self.degat=degat
+
+
 
     def create(self):
         self.circle=self.canvas.create_oval(self.x + 5 , self.y + 5 , self.x - 5 , self.y - 5 ,fill='white')
