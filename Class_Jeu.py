@@ -15,7 +15,6 @@ class Jeu(fenetre):
     def create_Alien():
         L=[]
         for i in range(1,len(self.Liste_Personnage)):
-            Alieni
             if self.Liste_Personnage[i]==0:
                 L.append(i)
         indiceL=randint(len(L))
