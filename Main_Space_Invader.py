@@ -1,9 +1,15 @@
+#Fait par Calisto Del Aguila et Bilel Ghouaiel
+#Implémentation des caractéristiques visuel de Space Invader, implémentation de la fenêtre et des boutons
+# #Fait le 18 novembre 2024
+# A améliorer:
+# # A ajouter: une image de fond
+
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
+from random import randint
+from Class_vaisseau import Vaisseau, Alien
+from Class_collisions import Collisions
 from Class_Projectile import Projectile
-from Class_vaisseau import Vaisseau,Alien
-import random as rd
-from Class_collisions import Collisions 
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
@@ -16,6 +22,7 @@ class Visuel(tk.Tk):
         self.canvas()
         self.personnage = Vaisseau(self.canvas1)
         self.aliens = Alien(self.canvas1)
+        self.collisions = Collisions(self.canvas1,Collisions.Jeu)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.score=tk.Label(self,text='Votre score est:')
@@ -40,8 +47,7 @@ class Visuel(tk.Tk):
         self.canvas1.pack()
         self.canvas1.create_image(800,700,anchor='center',image=self.image)
 
-if __name__=="__main__":
-    fenetre=Visuel()
-    fenetre.title("Space Invader")
-    fenetre.mainloop()
+fenetre=Visuel()
+fenetre.title("Space Invader")
+fenetre.mainloop()
 

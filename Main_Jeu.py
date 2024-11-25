@@ -60,7 +60,7 @@ class Jeu:
 
 
     def start(self):
-        Visuel()
+        self.fenetre=Visuel()
         Joueur= Vaisseau()
         Bloc1= bloc(50,self.fenetre)
         Bloc2= bloc(100,self.fenetre)
@@ -69,4 +69,4 @@ class Jeu:
 
 
 
-    canvas.after(10,create_Alien())
+    #canvas.after(10,create_Alien())
