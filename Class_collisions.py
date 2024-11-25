@@ -19,14 +19,23 @@ class Collisions:
 
 
     def col(self):
-        for projectile in Jeu.Liste_Projectiles:
-             for personnage in Jeu.Listes_Personnages:
-                if personnage == 0:
-               
-                elif projectile.x < personnage[0].x + 10  and   projectile.x < personnage[0].x - 10   and   projectile.y < personnage[0].y + 10   and   projectile.y < personnage[0].y - 10:
-                    personnage[1] += -projectile.degat
-                    destroy(projectile)
-                    if personnage[1] == 0 :
-                        destroy(personnage[1])
-                        personnage=0
+        indice_a_supprimer=[]
+        for i in range(len(Jeu.Liste_Projectiles)):
+             
+             projectile=Jeu.Liste_Projectiles[i]
 
+             for personnage in Jeu.Listes_Personnages:
+
+                if personnage=!0 and projectile.x < personnage.x + 10  and   projectile.x < personnage.x - 10   and   projectile.y < personnage.y + 10   and   projectile.y < personnage.y - 10 :
+                    personnage.vie += -projectile.degat
+                    projectile.canvas.delete(projectile.circle)
+                    indice_a_supprimer.append(i)
+
+                    if personnage.vie == 0 :
+
+                        personnage=0
+                        personnage.canvas.delete(personnage.rectangle)
+        n=0
+        for j in range(len(indice_a_supprimer)):
+            Jeu.Liste_Projectiles.pop(indice_a_supprimer[j]-n)
+        
