@@ -14,7 +14,7 @@ class Visuel(tk.Tk):
         self.canvas()
         self.personnage = Vaisseau(self.canvas1)
         self.aliens = Alien(self.canvas1)
-        self.collisions=Collisions(self.canvas)
+        self.collisions=Collisions(self.canvas1,self.personnage,self.aliens)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.score=tk.Label(self,text='Votre score est:')
@@ -86,6 +86,10 @@ class Alien:        #Implémente la classe alien avec ses différentes caractér
         self.x=coord[0]
         Projectile(self.x + 25, self.y - 25,8, self.canvas)
         self.canvas.after(self.dt2,self.tir)
+        malisteprojectile=[]
+        for i in range(10):
+            malisteprojectile.append(Projectile(self.x + 25, self.y - 25,8, self.canvas))
+            self.coordonne_projectile=self.canvas.coords(malisteprojectile[i].x,malisteprojectile[i].y)
 
 class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur lorsqu'il démarre une parte 
 
@@ -95,6 +99,7 @@ class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur
         self.y = 600
         self.v = 1
         self.dt = 8
+        self.projectiles_vaisseau=[]
         self.dx = 1
         self.dy = 0
         self.create()           #Ajout des fonctions nécessaire au fonctionnement du vaisseau
@@ -135,14 +140,25 @@ class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur
         y=0
         self.canvas.move(self.rectangle,x,y)
     
-    def tir(self,event):        #Fonctions qui ance un projectile lorsque l'on appuie sur la barre d'espace
+    def tir(self,event):        #Fonctions qui lance un projectile lorsque l'on appuie sur la barre d'espace
         coord=self.canvas.coords(self.rectangle)
         self.x=coord[0]
-        Projectile(self.x + 25, self.y,-8, self.canvas)
+        self.y=coord[1]
+        projectile=Projectile(self.x + 25, self.y,-8, self.canvas)
+        self.projectiles_vaisseau.append([projectile.x,projectile.y])
+        print(self.projectiles_vaisseau)
+        print(self.x,self.y)
+        
 
 class Collisions:
-  
-
+    def __init__(self,canvas,mon_vaisseau,mon_alien):
+      self.canvas=canvas
+      self.mon_vaisseau=mon_vaisseau
+      for projec in mon_vaisseau.projectiles_vaisseau:
+        if mon_alien.x >= projec.x:
+            if mon_alien.y == projec.y:
+                self.canvas.delete(mon_alien.rectangle)
+                self.mon_vaisseau.projectiles_vaisseau.remove(projec)
 
 
 if __name__=="__main__":
