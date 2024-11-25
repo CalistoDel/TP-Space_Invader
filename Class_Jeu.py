@@ -17,6 +17,7 @@ class Jeu():
         self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]
         self.indice_niveaux = [0,1,1,1,1,1,1,2,2,2,2,3]
         self.Liste_Projectile = []
+        self.score=0
 
     def create_Alien():
         # cette fontcion est un algoritme qui permet l'apparition d'aliens
@@ -28,6 +29,24 @@ class Jeu():
         indiceL=randint(len(L))
         indice=L[indiceL]
         self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
+    
+
+    def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
+        self.affichage_score=tk.Label(self,text='Score :'+ self.score)
+        self.affichage_score.pack(side='top')
+
+    
+
+    def score(alien):
+        point=alien.niveau
+        if alien.niveau == 3 :
+            point = 4
+        score += point
+    
+
+
+
+
 
 
 
@@ -37,7 +56,7 @@ class Jeu():
     Bloc1= bloc()
     Bloc2= bloc()
     self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=[Joueur,3],[Bloc1,3],[Bloc2,3]
-    
+
 
 
 
