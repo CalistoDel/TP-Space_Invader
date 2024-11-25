@@ -1,3 +1,10 @@
+#Fait par Calisto Del Aguila et Bilel Ghouaiel
+#implémentation de la classe projectils
+# #Fait le 18 novembre 2024
+# A améliorer: ajouter les vies supplémentaires qui tomberont à la mort d'un boss
+# # A ajouter: le skin du projectile
+
+
 import tkinter as tk
 
 class Projectile:
