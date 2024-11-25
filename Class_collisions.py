@@ -6,7 +6,6 @@
 
 
 import tkinter as tk
-from Class_Jeu import Jeu
 
 
 class Collisions:
@@ -20,9 +19,9 @@ class Collisions:
         indice_a_supprimer=[]
         for i in range(len(Jeu.Liste_Projectiles)):
              
-             projectile=Jeu.Liste_Projectiles[i]
+             projectile=self.Jeu.Liste_Projectiles[i]
 
-             for personnage in Jeu.Listes_Personnages:
+             for personnage in self.Jeu.Listes_Personnages:
 
                 if personnage!=0 and projectile.x < personnage.x + 10 and projectile.x < personnage.x-10 and projectile.y < personnage.y+10 and projectile.y < personnage.y-10:
                     personnage.vie += -projectile.degat
