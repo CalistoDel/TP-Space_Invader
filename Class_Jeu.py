@@ -10,6 +10,7 @@ from Class_Projectile import Projectile
 from Main_Space_Invader import Visuel
 from class_bloc import bloc
 from Class_vaisseau import Vaisseau , Alien
+from Class_collisions import Collisions
 from random import randint
 
 

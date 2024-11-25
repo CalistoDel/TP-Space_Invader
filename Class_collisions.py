@@ -9,8 +9,6 @@ import tkinter as tk
 from Class_Jeu import Jeu
 
 
-
-
 class Collisions:
     def __init__(self,canvas,Jeu):
       self.canvas=canvas
@@ -26,7 +24,7 @@ class Collisions:
 
              for personnage in Jeu.Listes_Personnages:
 
-                if personnage=!0 and projectile.x < personnage.x + 10  and   projectile.x < personnage.x - 10   and   projectile.y < personnage.y + 10   and   projectile.y < personnage.y - 10 :
+                if personnage!=0 and projectile.x < personnage.x + 10 and projectile.x < personnage.x-10 and projectile.y < personnage.y+10 and projectile.y < personnage.y-10:
                     personnage.vie += -projectile.degat
                     projectile.canvas.delete(projectile.circle)
                     indice_a_supprimer.append(i)
