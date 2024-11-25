@@ -7,15 +7,15 @@
 
 import tkinter as tk
 
-class Projectile(niveauAlien,degat):
-    def __init__(self,x,y,niveauAlien,canvas):
+class Projectile():
+    def __init__(self,x,y,niveauAlien,degat,canvas):
         self.x = x
         self.y = y
         self.dy = -8*niveauAlien
         self.canvas = canvas
         self.create()
         self.bouger()
-        self.dt = 15 ms
+        self.dt = 15
         self.degat=degat
 
 

@@ -5,6 +5,7 @@
 # A ajouter: Ajouter les dégats pouvant être pris par les vaisseaux et aliens (vie)
 
 import random as rd
+from Class_Projectile import Projectile
 
 class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur lorsqu'il démarre une parte 
 

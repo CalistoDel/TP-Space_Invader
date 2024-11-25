@@ -6,9 +6,9 @@
 
 import tkinter as tk
 
-class bloc(x,fenetre):
+class bloc():
 
-    def __init__(self):
+    def __init__(self,x,fenetre):
         self.x=x
         self.y = canvas_height = self.canvas.winfo_height() - 50
         self.create()
