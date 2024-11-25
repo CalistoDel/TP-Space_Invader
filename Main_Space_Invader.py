@@ -1,7 +1,9 @@
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
 from Class_Projectile import Projectile
+from Class_vaisseau import Vaisseau, Alien
 import random as rd
+from Class_collisions import Collisions 
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
