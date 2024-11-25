@@ -7,21 +7,25 @@
 
 import tkinter as tk
 
-class Projectile:
-    def __init__(self,x,y,dy,canvas):
+class Projectile():
+    def __init__(self,x,y,niveauAlien,degat,canvas):
         self.x = x
         self.y = y
-        self.dy = dy
-        self.canvas=canvas
+        self.dy = -8*niveauAlien
+        self.canvas = canvas
         self.create()
         self.bouger()
-    
+        self.dt = 15
+        self.degat=degat
+
+
 
     def create(self):
         self.circle=self.canvas.create_oval(self.x + 5 , self.y + 5 , self.x - 5 , self.y - 5 ,fill='white')
     
 
     def bouger(self):
+        #fonction qui fait bouger les projectiles
         self.dt=38
         self.y += self.dy
         self.canvas.move(self.circle,0,self.dy)
@@ -31,6 +35,7 @@ class Projectile:
     
     
     def toucher_bordure(self):
+        #Fonction qui détruit le projectile si il sort de la zone de jeu
         canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
 
         # Vérifie si le projectile touche les bords haut ou bas

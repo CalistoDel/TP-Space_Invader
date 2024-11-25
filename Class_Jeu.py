@@ -6,38 +6,63 @@
 
 
 import tkinter as tk
-import Class_Projectile
-import Main_Space_Invader
-import class_bloc
+from Class_Projectile import Projectile
+from Main_Space_Invader import Visuel,Vaisseau
+from class_bloc import bloc
+from Class_vaisseau import Alien
 from random import randint
 
-class Jeu(fenetre):
 
-    def __init__():
+class Jeu():
+
+    def __init__(self,fenetre):
         self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]
+        self.indice_niveaux = [0,1,1,1,1,1,1,2,2,2,2,3]
         self.Liste_Projectile = []
-        self.Temps_Début = gmtime()
-        self.Nb_Alien=0
+        self.score = 0
+        self.fenetre = fenetre
+        self.create_Alien()
+        self.label()
+        self.score()
 
-    def create_Alien():
+    def create_Alien(self):
         # cette fontcion est un algoritme qui permet l'apparition d'aliens
-        #
+        #les aliens apparaissent que si un element de la liste ListePersonnage est vide pour limiter le nombre d'aliens
         L=[]
-        for i in range(1,len(self.Liste_Personnage)):
-            if self.Liste_Personnage[i]==0:
+        for i in range(1,len(self.Liste_Personnages)):
+            if self.Liste_Personnages[i] ==0 :
                 L.append(i)
+
         indiceL=randint(len(L))
         indice=L[indiceL]
-        self.Liste_Personnages[indice] = Alien(...)
+        self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
+
+    
+
+
+    def score(self,alien):
+        point=alien.niveau
+        if alien.niveau == 3 :
+            point = 4
+        score += point
+    
+
+
+    def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
+        self.affichage_score = tk.Label( self,text = 'Score : '+ str(self.score) )
+        self.affichage_score.pack( side = 'top' )
+
+    
 
 
 
 
     Visuel()
-    Joueur= Vaisseau(canvas)
-    Bloc1= bloc()
-    Bloc2= bloc()
+    Joueur= Vaisseau()
+    Bloc1= bloc(50,self.fenetre)
+    Bloc2= bloc(100,self.fenetre)
     self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=[Joueur,3],[Bloc1,3],[Bloc2,3]
+
 
 
 
