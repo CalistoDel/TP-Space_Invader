@@ -13,7 +13,7 @@ from Class_vaisseau import Alien
 from random import randint
 
 
-class Jeu():
+class Jeu:
 
     def __init__(self,fenetre):
         self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]
@@ -24,6 +24,7 @@ class Jeu():
         self.create_Alien()
         self.label()
         self.score()
+        self.start()
 
     def create_Alien(self):
         # cette fontcion est un algoritme qui permet l'apparition d'aliens
@@ -57,11 +58,12 @@ class Jeu():
 
 
 
-    Visuel()
-    Joueur= Vaisseau()
-    Bloc1= bloc(50,self.fenetre)
-    Bloc2= bloc(100,self.fenetre)
-    self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=[Joueur,3],[Bloc1,3],[Bloc2,3]
+    def start(self):
+        Visuel()
+        Joueur= Vaisseau()
+        Bloc1= bloc(50,self.fenetre)
+        Bloc2= bloc(100,self.fenetre)
+        self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=Joueur,Bloc1,Bloc2
 
 
 

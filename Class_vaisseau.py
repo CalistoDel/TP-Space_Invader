@@ -17,6 +17,7 @@ class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur
         self.dt = 8
         self.dx = 1
         self.dy = 0
+        self.vie=3
         self.create()           #Ajout des fonctions nécessaire au fonctionnement du vaisseau
         self.toucher_bordure()
         self.key_handler()
@@ -69,6 +70,7 @@ class Alien:        #Implémente la classe alien avec ses différentes caractér
         self.y=30
         self.v=1
         self.dt=8
+        self.vie=3
         self.dt2=rd.randint(400,2000)
         print(self.dt2)
         self.dx=1

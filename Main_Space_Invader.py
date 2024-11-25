@@ -1,6 +1,7 @@
 #Importation de la librairie tkinter pour la partie visuelle de Space Invader
 import tkinter as tk
 from Class_Projectile import Projectile
+from Class_vaisseau import Vaisseau,Alien
 import random as rd
 
 class Visuel(tk.Tk):
@@ -14,7 +15,6 @@ class Visuel(tk.Tk):
         self.canvas()
         self.personnage = Vaisseau(self.canvas1)
         self.aliens = Alien(self.canvas1)
-        self.collisions=Collisions(self.canvas1,self.personnage,self.aliens)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.score=tk.Label(self,text='Votre score est:')

@@ -11,6 +11,7 @@ class bloc():
     def __init__(self,x,fenetre):
         self.x=x
         self.y = canvas_height = self.canvas.winfo_height() - 50
+        self.vie=3
         self.create()
     
     def create(self):
