@@ -52,6 +52,7 @@ class Jeu:
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.affichage_score = tk.Label( self,text = 'Score : '+ str(self.score) )
+        self.affichage_score = tk.Label( self,text = 'Vies : '+ str(self.Liste_Personnages[0].vie) )
         self.affichage_score.pack( side = 'top' )
 
     
@@ -65,7 +66,7 @@ class Jeu:
         Bloc1= bloc(50,self.fenetre)
         Bloc2= bloc(100,self.fenetre)
         self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=Joueur,Bloc1,Bloc2
-
+        
 
 
 
