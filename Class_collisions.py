@@ -7,19 +7,18 @@
 
 import tkinter as tk
 
-
 class Collisions:
-    def __init__(self,canvas,Jeu):
+    def __init__(self,canvas,Vaisseau):
       self.canvas=canvas
-      self.Jeu=Jeu
+      self.Vaisseau=Vaisseau
       self.col()
 
 
     def col(self):
         indice_a_supprimer=[]
-        for i in range(len(self.Jeu.Liste_Projectiles)):
+        for i in range(len(self.Vaisseau.Liste_Projectile)):
              
-             projectile=self.Jeu.Liste_Projectiles[i]
+             projectile=self.Vaisseau.Liste_Projectile[i]
 
              for personnage in self.Jeu.Listes_Personnages:
 
@@ -34,5 +33,5 @@ class Collisions:
                         personnage.canvas.delete(personnage.rectangle)
         n=0
         for j in range(len(indice_a_supprimer)):
-            self.Jeu.Liste_Projectiles.pop(indice_a_supprimer[j]-n)
+            self.Jeu.Liste_Projectile.pop(indice_a_supprimer[j]-n)
         

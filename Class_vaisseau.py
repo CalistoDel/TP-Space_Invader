@@ -14,6 +14,7 @@ class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur
         self.x = 350
         self.y = 600
         self.v = 1
+        self.Liste_Projectile = []
         self.dt = 8
         self.dx = 1
         self.dy = 0
