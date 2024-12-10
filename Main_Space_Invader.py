@@ -13,16 +13,17 @@ from Class_Projectile import Projectile
 
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
-    def __init__(self):
+    def __init__(self,Jeu):
         tk.Tk.__init__(self)         #Création de la fenêtre de jeu
         self.image=tk.PhotoImage(file="Espace.gif")
         self.label()
         self.Boutton()
         self.menu()
         self.canvas()
+        self.Jeu=Jeu
         self.personnage = Vaisseau(self.canvas1)
         self.aliens = Alien(self.canvas1)
-        self.collisions = Collisions(self.canvas1,Collisions.Jeu)
+        self.collisions = Collisions(self.canvas1,self.Jeu)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.score=tk.Label(self,text='Votre score est:')
