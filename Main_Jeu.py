@@ -32,7 +32,7 @@ class Jeu:
         #les aliens apparaissent que si un element de la liste ListePersonnage est vide pour limiter le nombre d'aliens
         L=[]
         for i in range(1,len(self.Liste_Personnages)):
-            if self.Liste_Personnages[i] ==0 :
+            if self.Liste_Personnages[i] == 0 :
                 L.append(i)
 
         indiceL=randint(len(L))
@@ -61,10 +61,10 @@ class Jeu:
 
 
     def start(self):
-        self.fenetre=Visuel()
-        Joueur= Vaisseau()
-        Bloc1= bloc(50,self.fenetre)
-        Bloc2= bloc(100,self.fenetre)
+        self.fenetre = Visuel()
+        Joueur = Vaisseau()
+        Bloc1 = bloc(50,self.fenetre)
+        Bloc2 = bloc(100,self.fenetre)
         self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=Joueur,Bloc1,Bloc2
         
 
@@ -72,7 +72,7 @@ class Jeu:
 
     #canvas.after(10,create_Alien())
 
-if __name__=="__main__":
-    fenetre=Visuel()
+if __name__ =="__main__":
+    fenetre = Visuel()
     fenetre.title("Space Invader")
     fenetre.mainloop()

@@ -7,6 +7,7 @@
 
 import tkinter as tk
 
+
 class Collisions:
     def __init__(self, canvas, vaisseau, liste_aliens):
         self.canvas = canvas

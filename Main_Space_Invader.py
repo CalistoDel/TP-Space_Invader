@@ -11,16 +11,15 @@ from Class_vaisseau import Vaisseau, Alien
 from Class_collisions import Collisions
 from Class_Projectile import Projectile
 
+
 class Visuel(tk.Tk):
 #Cette classse s'occupe de créer toute la partie graphique/visuelle de Space Invader
-    def __init__(self,Jeu):
+    def __init__(self):
         tk.Tk.__init__(self)         #Création de la fenêtre de jeu
-        self.image=tk.PhotoImage(file="Espace.gif")
+        self.canvas()
         self.label()
         self.Boutton()
         self.menu()
-        self.canvas()
-        self.Jeu=Jeu
         self.personnage = Vaisseau(self.canvas1)
         self.aliens = [Alien(self.canvas1) for _ in range(5)]
         self.collisions = Collisions(self.canvas1, self.personnage, self.aliens)
@@ -44,11 +43,10 @@ class Visuel(tk.Tk):
         self.config(menu=self.menubar)
 
     def canvas(self):       #fonction qui crée la toile
-        self.canvas1 = tk.Canvas(self,width= 800, height=700, bg='blue')
+        self.canvas1 = tk.Canvas(self,width= 800, height=700, bg='black')
         self.canvas1.pack()
-        self.canvas1.create_image(800,700,anchor='center',image=self.image)
 
-if __name__=="__main__":
+if __name__ == "__main__":
     fenetre = Visuel()
     fenetre.title("Space Invader")
     fenetre.mainloop()

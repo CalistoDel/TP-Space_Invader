@@ -7,6 +7,7 @@
 
 import tkinter as tk
 
+
 class Projectile:
     def __init__(self, x, y, direction, vitesse, degat, canvas):
         self.x = x
