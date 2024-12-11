@@ -71,3 +71,8 @@ class Jeu:
 
 
     #canvas.after(10,create_Alien())
+
+if __name__=="__main__":
+    fenetre=Visuel()
+    fenetre.title("Space Invader")
+    fenetre.mainloop()

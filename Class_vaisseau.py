@@ -7,108 +7,75 @@
 import random as rd
 from Class_Projectile import Projectile
 
-class Vaisseau:  # implémentation de la classe vaisseau utilisée par le joueur lorsqu'il démarre une parte 
-
-    def __init__(self,canvas):
-        self.canvas=canvas
+class Vaisseau:
+    # implémentation de la classe vaisseau utilisée par le joueur lorsqu'il démarre une parte 
+    def __init__(self, canvas):
+        self.canvas = canvas
         self.x = 350
         self.y = 600
-        self.v = 1
+        self.vie = 3
         self.Liste_Projectile = []
-        self.dt = 8
-        self.dx = 1
-        self.dy = 0
-        self.vie=3
-        self.create()           #Ajout des fonctions nécessaire au fonctionnement du vaisseau
-        self.toucher_bordure()
+        self.rectangle = self.create()
         self.key_handler()
 
-    def create(self):       #Création du vaisseau sur la page de jeu
-        self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='blue')
+    def create(self):
+        return self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50, fill='blue')
 
-    def toucher_bordure(self):      
-        canvas_width = self.canvas.winfo_width()  # Largeur du canevas
-        canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
-
-        # Vérifie si le personnage touche les bords gauche ou droit
-        if self.x <= 0 or self.x + 50 >= canvas_width:
-            self.dx = -self.dx  # Inverse la direction horizontale
-
-            self.y += 25
-            self.canvas.move(self.rectangle,0,10)
-
-        # Vérifie si le personnage touche les bords haut ou bas
-        if self.y <= 0 or self.y + 50 >= canvas_height:
-            self.dy = -self.dy
-
-    def key_handler(self):              #Fonctions qui permet de renvoyer aux fonctions lors de l'appuie sur différentes touches du clavier
+    def key_handler(self):
         self.canvas.bind("<Right>", self.Right)
         self.canvas.bind("<Left>", self.Left)
-        self.canvas.bind("<space>",self.tir)
-        self.canvas.focus_set()    
-        
-    def Left(self,event):       #Fonctions qui fait bouger à gauche le vaisseau quand on appuie sur la flèche de gauche
-        x=-50
-        y=0
-        self.canvas.move(self.rectangle,x,y)
-    
-    def Right(self,event):      #Fonctions qui fait bouger à droite le vaisseau quand on appuie sur la flèche de droite
-        x=50
-        y=0
-        self.canvas.move(self.rectangle,x,y)
-    
-    def tir(self,event):        #Fonctions qui ance un projectile lorsque l'on appuie sur la barre d'espace
-        coord=self.canvas.coords(self.rectangle)
-        self.x=coord[0]
-        Projectile(self.x + 25, self.y,1,1, self.canvas)
+        self.canvas.bind("<space>", self.tir)
+        self.canvas.focus_set()
+
+    def Left(self, event):
+        if self.canvas.coords(self.rectangle)[0] > 0:
+            self.canvas.move(self.rectangle, -20, 0)
+
+    def Right(self, event):
+        if self.canvas.coords(self.rectangle)[2] < self.canvas.winfo_width():
+            self.canvas.move(self.rectangle, 20, 0)
+
+    def tir(self, event):
+        coord = self.canvas.coords(self.rectangle)
+        x = (coord[0] + coord[2]) / 2
+        y = coord[1]
+        self.Liste_Projectile.append(Projectile(x, y, -1, 10, 1, self.canvas))
 
 
 
-class Alien:        #Implémente la classe alien avec ses différentes caractéristiques
-    def __init__(self,canvas):
-        self.canvas=canvas
-        self.x=350                      #Définie la position de l'alien
-        self.y=30
-        self.v=1
-        self.dt=8
-        self.vie=3
-        self.dt2=rd.randint(400,2000)
-        print(self.dt2)
-        self.dx=1
-        self.dy=0
-        self.create()
+class Alien:
+    def __init__(self, canvas, niveau=1):
+        self.canvas = canvas
+        self.x = rd.randint(50, 750)
+        self.y = rd.randint(30, 150)
+        self.niveau = niveau
+        self.vie = 3
+        self.dx = 2
+        self.dy = 0
+        self.rectangle = self.create()
         self.bouger()
-        self.toucher_bordure()
+        self.projectiles = []
         self.tir()
 
-    def create(self):       #Fonctions qui crée les aliens
-        self.rectangle=self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50,fill='red')
+    def create(self):
+        return self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50, fill='red')
 
-    def bouger(self):       #Fonctions qui fait bouger l'alien horizontalement
-        self.canvas.move(self.rectangle, self.dx, self.dy)
+    def bouger(self):
+        self.canvas.move(self.rectangle, self.dx, 0)
         self.x += self.dx
-        self.y += self.dy
-        self.toucher_bordure()  # Vérifie si le personnage touche un bord
-        self.canvas.after(self.dt, self.bouger)
+        if self.toucher_bordure():
+            self.dx = -self.dx
+            self.canvas.move(self.rectangle, 0, 25)
+        self.canvas.after(50, self.bouger)
 
     def toucher_bordure(self):
-        canvas_width = self.canvas.winfo_width()  # Largeur du canevas
-        canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
+        canvas_width = self.canvas.winfo_width()
+        coords = self.canvas.coords(self.rectangle)
+        return coords[0] <= 0 or coords[2] >= canvas_width
 
-        # Vérifie si le personnage touche les bords gauche ou droit
-        if self.x <= 0 or self.x + 50 >= canvas_width:
-            self.dx = -self.dx  # Inverse la direction horizontale
-
-            self.y += 25
-            self.canvas.move(self.rectangle,0,10)
-
-        # Vérifie si le personnage touche les bords haut ou bas
-        if self.y <= 0 or self.y + 50 >= canvas_height:
-            self.dy = -self.dy
-
-    def tir(self):      #Fonctions qui fait tirer l'alien automatiquement avec un intervallee de tir pris au hasard
-        self.dt2=rd.randint(400,2000)
-        coord=self.canvas.coords(self.rectangle)
-        self.x=coord[0]
-        Projectile(self.x + 25, self.y - 25,8,1, self.canvas)
-        self.canvas.after(self.dt2,self.tir)
+    def tir(self):
+        coord = self.canvas.coords(self.rectangle)
+        x = (coord[0] + coord[2]) / 2
+        y = coord[3]
+        self.projectiles.append(Projectile(x, y, 1, 5, 1, self.canvas))
+        self.canvas.after(rd.randint(2000, 4000), self.tir)

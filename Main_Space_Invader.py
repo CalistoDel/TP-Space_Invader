@@ -21,21 +21,21 @@ class Visuel(tk.Tk):
         self.menu()
         self.canvas()
         self.personnage = Vaisseau(self.canvas1)
-        self.aliens = Alien(self.canvas1)
-        self.collisions = Collisions(self.canvas1,Collisions.Vaisseau)
+        self.aliens = [Alien(self.canvas1) for _ in range(5)]
+        self.collisions = Collisions(self.canvas1, self.personnage, self.aliens)
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
-        self.score=tk.Label(self,text='Votre score est:')
+        self.score = tk.Label(self,text='Votre score est:')
         self.score.pack(side='top')
 
     def Boutton(self):      #fonction qui créer les différents bouttons
-        self.JeuButton=tk.Button(self,text='Jouer')
-        self.QuitButton=tk.Button(self,text='Quitter',command=self.destroy)
+        self.JeuButton = tk.Button(self,text='Jouer')
+        self.QuitButton = tk.Button(self,text='Quitter',command=self.destroy)
         self.QuitButton.pack(side='bottom')
         self.JeuButton.pack()
 
     def menu(self):         #fonction qui créer une barre déroulante
-        self.menubar=tk.Menu(self)
+        self.menubar = tk.Menu(self)
         self.menu1=tk.Menu(self.menubar,tearoff=0)
         self.menubar.add_cascade(label='Menu',menu=self.menu1)
         self.menu1.add_command(label="Rejouer")
@@ -43,12 +43,12 @@ class Visuel(tk.Tk):
         self.config(menu=self.menubar)
 
     def canvas(self):       #fonction qui crée la toile
-        self.canvas1=tk.Canvas(self,width= 800, height=700, bg='blue')
+        self.canvas1 = tk.Canvas(self,width= 800, height=700, bg='blue')
         self.canvas1.pack()
         self.canvas1.create_image(800,700,anchor='center',image=self.image)
 
 if __name__=="__main__":
-    fenetre=Visuel()
+    fenetre = Visuel()
     fenetre.title("Space Invader")
     fenetre.mainloop()
 

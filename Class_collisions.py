@@ -8,30 +8,44 @@
 import tkinter as tk
 
 class Collisions:
-    def __init__(self,canvas,Vaisseau):
-      self.canvas=canvas
-      self.Vaisseau=Vaisseau
-      self.col()
-
+    def __init__(self, canvas, vaisseau, liste_aliens):
+        self.canvas = canvas
+        self.vaisseau = vaisseau
+        self.liste_aliens = liste_aliens
+        self.col()
 
     def col(self):
-        indice_a_supprimer=[]
-        for i in range(len(self.Vaisseau.Liste_Projectile)):
-             
-             projectile=self.Vaisseau.Liste_Projectile[i]
+        self.detect_vaisseau_projectiles()
+        self.detect_aliens_projectiles()
+        self.canvas.after(50, self.col)
 
-             for personnage in self.Jeu.Listes_Personnages:
+    def detect_vaisseau_projectiles(self):
+        for projectile in self.vaisseau.Liste_Projectile[:]:
+            for alien in self.liste_aliens[:]:
+                if self.detect_collision(projectile.circle, alien.rectangle):
+                    alien.vie -= projectile.degat
+                    self.canvas.delete(projectile.circle)
+                    self.vaisseau.Liste_Projectile.remove(projectile)
+                    if alien.vie <= 0:
+                        self.canvas.delete(alien.rectangle)
+                        self.liste_aliens.remove(alien)
 
-                if personnage!=0 and projectile.x < personnage.x + 10 and projectile.x < personnage.x-10 and projectile.y < personnage.y+10 and projectile.y < personnage.y-10:
-                    personnage.vie += -projectile.degat
-                    projectile.canvas.delete(projectile.circle)
-                    indice_a_supprimer.append(i)
+    def detect_aliens_projectiles(self):
+        for alien in self.liste_aliens:
+            for projectile in alien.projectiles[:]:
+                if self.detect_collision(projectile.circle, self.vaisseau.rectangle):
+                    self.canvas.delete(projectile.circle)
+                    alien.projectiles.remove(projectile)
+                    self.vaisseau.vie -= projectile.degat
+                    if self.vaisseau.vie <= 0:
+                        print("Game Over!")
+                        self.canvas.quit()
 
-                    if personnage.vie == 0 :
-
-                        personnage=0
-                        personnage.canvas.delete(personnage.rectangle)
-        n=0
-        for j in range(len(indice_a_supprimer)):
-            self.Jeu.Liste_Projectile.pop(indice_a_supprimer[j]-n)
+    def detect_collision(self, obj1, obj2):
+        bbox1 = self.canvas.bbox(obj1)
+        bbox2 = self.canvas.bbox(obj2)
+        if not bbox1 or not bbox2:
+            return False
+        return not (bbox1[2] < bbox2[0] or bbox1[0] > bbox2[2] or
+                    bbox1[3] < bbox2[1] or bbox1[1] > bbox2[3])
         

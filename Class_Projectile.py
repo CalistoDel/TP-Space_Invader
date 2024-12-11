@@ -7,37 +7,27 @@
 
 import tkinter as tk
 
-class Projectile():
-    def __init__(self,x,y,niveauAlien,degat,canvas):
+class Projectile:
+    def __init__(self, x, y, direction, vitesse, degat, canvas):
         self.x = x
         self.y = y
-        self.dy = -8*niveauAlien
+        self.dy = direction * vitesse
         self.canvas = canvas
-        self.create()
+        self.degat = degat
+        self.circle = self.create()
         self.bouger()
-        self.dt = 15
-        self.degat=degat
-
-
 
     def create(self):
-        self.circle=self.canvas.create_oval(self.x + 5 , self.y + 5 , self.x - 5 , self.y - 5 ,fill='white')
-    
+        return self.canvas.create_oval(self.x - 5, self.y - 5, self.x + 5, self.y + 5, fill='white')
 
     def bouger(self):
-        #fonction qui fait bouger les projectiles
-        self.dt=38
         self.y += self.dy
-        self.canvas.move(self.circle,0,self.dy)
-        self.canvas.after(self.dt, self.bouger)
-
-        self.toucher_bordure()
-    
-    
-    def toucher_bordure(self):
-        #Fonction qui détruit le projectile si il sort de la zone de jeu
-        canvas_height = self.canvas.winfo_height()  # Hauteur du canevas
-
-        # Vérifie si le projectile touche les bords haut ou bas
-        if self.y <= 0 or self.y + 8 >= canvas_height:
+        self.canvas.move(self.circle, 0, self.dy)
+        if self.toucher_bordure():
             self.canvas.delete(self.circle)
+        else:
+            self.canvas.after(30, self.bouger)
+
+    def toucher_bordure(self):
+        canvas_height = self.canvas.winfo_height()
+        return self.y <= 0 or self.y >= canvas_height
