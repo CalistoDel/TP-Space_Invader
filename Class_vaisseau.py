@@ -79,3 +79,4 @@ class Alien:
         y = coord[3]
         self.projectiles.append(Projectile(x, y, 1, 5, 1, self.canvas))
         self.canvas.after(rd.randint(2000, 4000), self.tir)
+    
