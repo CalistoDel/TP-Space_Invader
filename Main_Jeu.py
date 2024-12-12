@@ -4,7 +4,7 @@
 # A améliorer: l'algorithme d'apparition des aliens
 # A ajouter: Gérer les interactions entre les projectils, les blocs et les personnages
 
-
+#implémentations des librairies et des autres classes
 import tkinter as tk
 from Class_Projectile import Projectile
 from Main_Space_Invader import Visuel
@@ -39,18 +39,18 @@ class Jeu:
         indice=L[indiceL]
         self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
 
-    def score(self,alien):
-        point=alien.niveau
-        if alien.niveau == 3 :
-            point = 4
-        score += point
+    def ajouter_points(self, alien):            #fonction qui ajoute des points lorsqu'on tue des aliens
+        points = alien.niveau if alien.niveau < 3 else 4
+        self.score += points
+        self.update_score_label()
+
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.affichage_score = tk.Label( self,text = 'Score : '+ str(self.score) )
         self.affichage_score = tk.Label( self,text = 'Vies : '+ str(self.Liste_Personnages[0].vie) )
         self.affichage_score.pack( side = 'top' )
 
-    def start(self):
+    def start(self):            #fonction qui est censé ajouté des blocs de protections pour que le vaisseau se cache
         self.fenetre = Visuel()
         Joueur = Vaisseau()
         Bloc1 = bloc(50,self.fenetre)
@@ -58,7 +58,7 @@ class Jeu:
         self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=Joueur,Bloc1,Bloc2
         
 
-        self.canvas.after(10,self.create_Alien())
+        self.canvas1.after(10,self.create_Alien())
 
 if __name__ == "__main__":
     fenetre = Visuel()
