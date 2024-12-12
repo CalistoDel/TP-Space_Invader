@@ -41,19 +41,27 @@ class Collisions:
                         self.canvas.delete(alien.rectangle)
                         self.liste_aliens.remove(alien)
 
-    def detect_aliens_projectiles(self):           #fonction qui détecte si il y a collisions entre les projectiles et les aliens
+    def detect_aliens_projectiles(self):
+        #fonction qui détecte si il y a collisions entre les projectiles et les aliens
+        
         for alien in self.liste_aliens:
+        
             for projectile in alien.projectiles[:]:
+        
                 if self.detect_collision(projectile.circle, self.vaisseau.rectangle):
+        
                     self.canvas.delete(projectile.circle)
                     alien.projectiles.remove(projectile)
                     self.vaisseau.vie -= projectile.degat
+        
                     if self.vaisseau.vie <= 0:
+        
                         print("Game Over!")
                         self.canvas.quit()
 
     def detect_collision(self, obj1, obj2):         
         #fonction qui détecte la collision ou si un projectile passe proche d'un alien ou du vaisseau
+        
         bbox1 = self.canvas.bbox(obj1)
         bbox2 = self.canvas.bbox(obj2)
         if not bbox1 or not bbox2:

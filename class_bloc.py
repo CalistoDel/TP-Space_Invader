@@ -2,7 +2,7 @@
 #implémentation de la classe bloc
 #Fait le 18 novembre 2024
 # A améliorer: inclure le bloc dans la classe personnage avec une vitesse nulle
-# A ajouter: Ajouter le skin du bloc
+# A ajouter: Ajouter l'image des bloc
 
 import tkinter as tk
 

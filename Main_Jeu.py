@@ -9,15 +9,16 @@ import tkinter as tk
 from Class_Projectile import Projectile
 from Main_Space_Invader import Visuel
 from class_bloc import bloc
-from Class_vaisseau import Vaisseau , Alien
+from Class_vaisseau import Vaisseau
+from Class_Alien import Alien
 from Class_collisions import Collisions
 from random import randint
 
 
 class Jeu:
-
+    #Classe qui gère les informations liées au jeu (interaction entre les personnages et les classes personnages/bloc/Projectiles etc)
     def __init__(self,fenetre):
-        self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]
+        self.Liste_Personnages = [0,0,0,0,0,0,0,0,0,0,0,0]  #utilisation de listes
         self.indice_niveaux = [0,1,1,1,1,1,1,2,2,2,2,3]
         self.Liste_Projectile = []
         self.score = 0
@@ -34,24 +35,31 @@ class Jeu:
         for i in range(1,len(self.Liste_Personnages)):
             if self.Liste_Personnages[i] == 0 :
                 L.append(i)
+        
+        self.fenetre.after(15, self.create_Alien)
 
         indiceL=randint(len(L))
         indice=L[indiceL]
         self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
 
-    def ajouter_points(self, alien):            #fonction qui ajoute des points lorsqu'on tue des aliens
+    def ajouter_points(self, alien):
+        #fonction qui ajoute des points lorsqu'on tue des aliens
+        
         points = alien.niveau if alien.niveau < 3 else 4
         self.score += points
         self.update_score_label()
 
 
-    def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
+    def label(self):
+        #fonction qui créer tous les textes présent sur la fenêtre 
+        
         self.affichage_score = tk.Label( self,text = 'Score : '+ str(self.score) )
         self.affichage_score = tk.Label( self,text = 'Vies : '+ str(self.Liste_Personnages[0].vie) )
         self.affichage_score.pack( side = 'top' )
 
-    def start(self):            #fonction qui est censé ajouté des blocs de protections pour que le vaisseau se cache
-        self.fenetre = Visuel()
+    def start(self):
+        #fonction qui est censée ajouter des blocs de protection pour que le vaisseau puisse se protéger
+
         Joueur = Vaisseau()
         Bloc1 = bloc(50,self.fenetre)
         Bloc2 = bloc(100,self.fenetre)
