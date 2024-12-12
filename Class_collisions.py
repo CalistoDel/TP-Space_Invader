@@ -1,33 +1,43 @@
 #Fait par Calisto Del Aguila et Bilel Ghouaiel
-#implémentation de la classe Jeu du space invader
+#implémentation de la classe Collisions du space invader
 # #Fait le 18 novembre 2024
 # A améliorer: l'algorithme d'apparition des aliens
-# A ajouter: Gérer les interactions entre les projectils, les blocs et les personnages
+# A ajouter: l'image des projectiles
 
 
 import tkinter as tk
 
 
-class Collisions:           #classe qui gère l'ensemble des collisions entre les projectiles et les vaisseaux et aliens
+class Collisions:           
+    #classe qui gère l'ensemble des collisions entre les projectiles et les vaisseaux et aliens
     def __init__(self, canvas, vaisseau, liste_aliens):
+
         self.canvas = canvas
-        self.vaisseau = vaisseau
-        self.liste_aliens = liste_aliens
+        self.vaisseau = vaisseau #le vaisseau est le joueur
+        self.liste_aliens = liste_aliens #liste contenant les aliens dont on va vérifier la position
         self.col()
 
-    def col(self):             #fonction qui gère l'ensemble des collisions aliens et vaisseau
+    def col(self):
+        #fonction qui gère l'ensemble des collisions aliens et vaisseau
+
         self.detect_vaisseau_projectiles()
         self.detect_aliens_projectiles()
         self.canvas.after(50, self.col)
 
-    def detect_vaisseau_projectiles(self):          #fonction qui détecte si il y a collisions entres les projectiles et le vaisseau
+    def detect_vaisseau_projectiles(self):
+        #fonction qui détecte si il y a collisions entres les projectiles et le vaisseau
+
         for projectile in self.vaisseau.Liste_Projectile[:]:
+
             for alien in self.liste_aliens[:]:
+
                 if self.detect_collision(projectile.circle, alien.rectangle):
                     alien.vie -= projectile.degat
                     self.canvas.delete(projectile.circle)
                     self.vaisseau.Liste_Projectile.remove(projectile)
+
                     if alien.vie <= 0:
+                        #supprime l'alien si il n'a plus de vie
                         self.canvas.delete(alien.rectangle)
                         self.liste_aliens.remove(alien)
 
@@ -42,7 +52,8 @@ class Collisions:           #classe qui gère l'ensemble des collisions entre le
                         print("Game Over!")
                         self.canvas.quit()
 
-    def detect_collision(self, obj1, obj2):         #fonction qui détecte la collision ou si un projectile passe proche d'un alien ou du vaisseau
+    def detect_collision(self, obj1, obj2):         
+        #fonction qui détecte la collision ou si un projectile passe proche d'un alien ou du vaisseau
         bbox1 = self.canvas.bbox(obj1)
         bbox2 = self.canvas.bbox(obj2)
         if not bbox1 or not bbox2:
