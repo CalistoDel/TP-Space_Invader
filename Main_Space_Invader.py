@@ -49,6 +49,7 @@ class Visuel(tk.Tk):
         self.canvas1.create_image(800,700,anchor='center',image=self.image)
 
 if __name__=="__main__":
+    
     fenetre=Visuel()
     fenetre.title("Space Invader")
     fenetre.mainloop()
