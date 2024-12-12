@@ -35,7 +35,7 @@ class Visuel(tk.Tk):
         self.menubar = tk.Menu(self)
         self.menu1=tk.Menu(self.menubar,tearoff=0)
         self.menubar.add_cascade(label='Menu',menu=self.menu1)
-        self.menu1.add_command(label="Rejouer", command=self.rejouer)
+        self.menu1.add_command(label="Rejouer")
         self.menu1.add_command(label="A propos")
         self.config(menu=self.menubar)
 
