@@ -39,26 +39,16 @@ class Jeu:
         indice=L[indiceL]
         self.Liste_Personnages[indice] = Alien(self.indice_niveaux[indice])
 
-    
-
-
     def score(self,alien):
         point=alien.niveau
         if alien.niveau == 3 :
             point = 4
         score += point
-    
-
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
         self.affichage_score = tk.Label( self,text = 'Score : '+ str(self.score) )
         self.affichage_score = tk.Label( self,text = 'Vies : '+ str(self.Liste_Personnages[0].vie) )
         self.affichage_score.pack( side = 'top' )
-
-    
-
-
-
 
     def start(self):
         self.fenetre = Visuel()
@@ -68,11 +58,9 @@ class Jeu:
         self.Liste_Personnage[0],self.Liste_Personnage[10],self.Liste_Personnage[11]=Joueur,Bloc1,Bloc2
         
 
+        self.canvas.after(10,self.create_Alien())
 
-
-    #canvas.after(10,create_Alien())
-
-if __name__ =="__main__":
+if __name__ == "__main__":
     fenetre = Visuel()
     fenetre.title("Space Invader")
     fenetre.mainloop()
