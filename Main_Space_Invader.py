@@ -22,7 +22,7 @@ class Visuel(tk.Tk):
         self.menu()
 
     def label(self):        #fonction qui créer tous les textes présent sur la fenêtre 
-        self.score = tk.Label(self,text='Votre score est:')
+        self.score = tk.Label(self,text='Votre score est: 0')
         self.score.pack(side='top')
 
     def Boutton(self):      #fonction qui créer les différents bouttons
@@ -43,15 +43,7 @@ class Visuel(tk.Tk):
         self.canvas1 = tk.Canvas(self,width= 800, height=700, bg='black')
         self.canvas1.pack()
 
-    def page_jeu(self):
-        self.label()
-        self.Boutton()
-        self.menu()
-        self.personnage = Vaisseau(self.canvas1)
-        self.aliens = [Alien(self.canvas1) for _ in range(5)]
-        self.collisions = Collisions(self.canvas1, self.personnage, self.aliens)
-
-    def rejouer(self):
+    def page_jeu(self):         #fonction qui permet de démarrer la partie de jeu
         self.label()
         self.Boutton()
         self.menu()

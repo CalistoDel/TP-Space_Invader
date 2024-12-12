@@ -18,24 +18,24 @@ class Vaisseau:
         self.rectangle = self.create()
         self.key_handler()
 
-    def create(self):
+    def create(self):       #fonction qui crée le vaisseau
         return self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50, fill='blue')
 
-    def key_handler(self):
+    def key_handler(self):      #fonction qui permet de gérer l'interaction entre le clavier du joueur et les mouvements
         self.canvas.bind("<Right>", self.Right)
         self.canvas.bind("<Left>", self.Left)
         self.canvas.bind("<space>", self.tir)
         self.canvas.focus_set()
 
-    def Left(self, event):
+    def Left(self, event):      #fonction qui fait bouger le personnage à gauche quand l'utilisateur appuye sur flèche de gauche
         if self.canvas.coords(self.rectangle)[0] > 0:
             self.canvas.move(self.rectangle, -20, 0)
 
-    def Right(self, event):
+    def Right(self, event):     #fonction qui fait bouger le personnage à droite quand l'utilisateur appuye sur flèche de droite
         if self.canvas.coords(self.rectangle)[2] < self.canvas.winfo_width():
             self.canvas.move(self.rectangle, 20, 0)
 
-    def tir(self, event):
+    def tir(self, event):       #fonction qui fait tirer le personnage quand l'utilisateur appuye sur barre espace
         coord = self.canvas.coords(self.rectangle)
         x = (coord[0] + coord[2]) / 2
         y = coord[1]
@@ -44,6 +44,7 @@ class Vaisseau:
 
 
 class Alien:
+    #Classe qui gère les aliens (leur création, leur déplacement et leurs tirs)
     def __init__(self, canvas, niveau=1):
         self.canvas = canvas
         self.x = rd.randint(50, 750)
@@ -57,10 +58,10 @@ class Alien:
         self.projectiles = []
         self.tir()
 
-    def create(self):
+    def create(self):       #fonction qui crée les aliens
         return self.canvas.create_rectangle(self.x, self.y, self.x + 50, self.y + 50, fill='red')
 
-    def bouger(self):
+    def bouger(self):       #fonction qui crée l'ensemble des mouvements que font les aliens
         self.canvas.move(self.rectangle, self.dx, 0)
         self.x += self.dx
         if self.toucher_bordure():
@@ -68,12 +69,12 @@ class Alien:
             self.canvas.move(self.rectangle, 0, 25)
         self.canvas.after(50, self.bouger)
 
-    def toucher_bordure(self):
+    def toucher_bordure(self):      #fonction qui gère les interactions entre les bordure et les aliens
         canvas_width = self.canvas.winfo_width()
         coords = self.canvas.coords(self.rectangle)
         return coords[0] <= 0 or coords[2] >= canvas_width
 
-    def tir(self):
+    def tir(self):         #fonction qui gère les tirs des aliens
         coord = self.canvas.coords(self.rectangle)
         x = (coord[0] + coord[2]) / 2
         y = coord[3]

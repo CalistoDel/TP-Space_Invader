@@ -8,19 +8,19 @@
 import tkinter as tk
 
 
-class Collisions:
+class Collisions:           #classe qui gère l'ensemble des collisions entre les projectiles et les vaisseaux et aliens
     def __init__(self, canvas, vaisseau, liste_aliens):
         self.canvas = canvas
         self.vaisseau = vaisseau
         self.liste_aliens = liste_aliens
         self.col()
 
-    def col(self):
+    def col(self):             #fonction qui gère l'ensemble des collisions aliens et vaisseau
         self.detect_vaisseau_projectiles()
         self.detect_aliens_projectiles()
         self.canvas.after(50, self.col)
 
-    def detect_vaisseau_projectiles(self):
+    def detect_vaisseau_projectiles(self):          #fonction qui détecte si il y a collisions entres les projectiles et le vaisseau
         for projectile in self.vaisseau.Liste_Projectile[:]:
             for alien in self.liste_aliens[:]:
                 if self.detect_collision(projectile.circle, alien.rectangle):
@@ -31,7 +31,7 @@ class Collisions:
                         self.canvas.delete(alien.rectangle)
                         self.liste_aliens.remove(alien)
 
-    def detect_aliens_projectiles(self):
+    def detect_aliens_projectiles(self):           #fonction qui détecte si il y a collisions entre les projectiles et les aliens
         for alien in self.liste_aliens:
             for projectile in alien.projectiles[:]:
                 if self.detect_collision(projectile.circle, self.vaisseau.rectangle):
@@ -42,7 +42,7 @@ class Collisions:
                         print("Game Over!")
                         self.canvas.quit()
 
-    def detect_collision(self, obj1, obj2):
+    def detect_collision(self, obj1, obj2):         #fonction qui détecte la collision ou si un projectile passe proche d'un alien ou du vaisseau
         bbox1 = self.canvas.bbox(obj1)
         bbox2 = self.canvas.bbox(obj2)
         if not bbox1 or not bbox2:

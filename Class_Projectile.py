@@ -8,7 +8,7 @@
 import tkinter as tk
 
 
-class Projectile:
+class Projectile:           #classe gérant l'ensemble des projectiles qui soit du vaisseau ou des aliens
     def __init__(self, x, y, direction, vitesse, degat, canvas):
         self.x = x
         self.y = y
@@ -18,10 +18,10 @@ class Projectile:
         self.circle = self.create()
         self.bouger()
 
-    def create(self):
+    def create(self):           #fonction qui crée le projectile en forme d'oval
         return self.canvas.create_oval(self.x - 5, self.y - 5, self.x + 5, self.y + 5, fill='white')
 
-    def bouger(self):
+    def bouger(self):           #fonction qui gère les mouvements du projectile
         self.y += self.dy
         self.canvas.move(self.circle, 0, self.dy)
         if self.toucher_bordure():
@@ -29,6 +29,6 @@ class Projectile:
         else:
             self.canvas.after(30, self.bouger)
 
-    def toucher_bordure(self):
+    def toucher_bordure(self):          #fonction qui gère l'interaction entre les bordures et les projectiles
         canvas_height = self.canvas.winfo_height()
         return self.y <= 0 or self.y >= canvas_height
